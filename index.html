@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Srujal Parmar — Data Analyst</title>
+
+    <style>
+
+        /* =========================================================
+           ROOT & GLOBAL
+        ========================================================= */
+
+        :root {
+            --bg: #080b0a;
+            --panel: #0e1311;
+            --line: #222b27;
+            --text: #f2f5f2;
+            --muted: #8e9a94;
+            --lime: #c9ff43;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.45;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.1;
+
+            background-image:
+                linear-gradient(#fff1 1px, transparent 1px),
+                linear-gradient(90deg, #fff1 1px, transparent 1px);
+
+            background-size: 70px 70px;
+
+            mask-image: linear-gradient(#000, transparent 80%);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .wrap {
+            width: min(var(--max), calc(100% - 40px));
+            margin: auto;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            z-index: 30;
+
+            top: 14px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: min(1100px, calc(100% - 28px));
+            height: 52px;
+
+            padding: 7px 8px 7px 15px;
+
+            border: 1px solid #ffffff12;
+            background: #0c110fe8;
+
+            backdrop-filter: blur(18px);
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 34px;
+            height: 34px;
+
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+            display: block;
+
+            border-radius: 7px;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .links a {
+            font-size: 12px;
+            color: #9ba69f;
+
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            white-space: nowrap;
+
+            transition: 0.2s ease;
+        }
+
+        .links a:hover {
+            color: #fff;
+            background: #ffffff08;
+        }
+
+        .links .resume {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-left: 8px;
+            padding: 8px 14px;
+
+            border: 1px solid var(--lime);
+            border-radius: 8px;
+
+            background: var(--lime);
+            color: #090d08;
+
+            font-size: 11px;
+            font-weight: 850;
+            line-height: 1;
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .links .resume:hover {
+            transform: translateY(-1px);
+            background: #d8ff69;
+            box-shadow: 0 0 20px #c9ff4328;
+        }
+
+        .menu {
+            display: none;
+
+            border: 0;
+            background: none;
+
+            color: #fff;
+
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           COMMON
+        ========================================================= */
+
+        section {
+            padding: 58px 0;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            gap: 25px;
+
+            margin-bottom: 23px;
+        }
+
+        .section-head p {
+            max-width: 390px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .eyebrow,
+        .kicker {
+            font: 800 10px monospace;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--lime);
+        }
+
+        .eyebrow {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--lime);
+
+            box-shadow: 0 0 14px var(--lime);
+        }
+
+        h2 {
+            font-size: clamp(34px, 4.5vw, 58px);
+            line-height: 0.92;
+            letter-spacing: -0.065em;
+
+            margin-top: 8px;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 39px;
+
+            padding: 9px 14px;
+
+            border: 1px solid var(--line);
+            border-radius: 9px;
+
+            background: #111613;
+            color: #dfe6e2;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: #ffffff25;
+        }
+
+        .btn.primary {
+            background: var(--lime);
+            color: #0a0e08;
+
+            border-color: var(--lime);
+        }
+
+        /* HERO RESUME BUTTON */
+        .actions .resume {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 39px;
+            padding: 9px 14px;
+
+            border: 1px solid var(--line);
+            border-radius: 9px;
+
+            background: #111613;
+            color: #dfe6e2;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            transition: 0.2s ease;
+        }
+
+        .actions .resume:hover {
+            transform: translateY(-2px);
+            border-color: #ffffff25;
+            background: #151b18;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+
+            transition: 0.55s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            padding: 135px 0 55px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 42px;
+
+            align-items: center;
+        }
+
+        h1 {
+            font-size: clamp(58px, 8vw, 112px);
+
+            line-height: 0.84;
+            letter-spacing: -0.07em;
+
+            font-weight: 950;
+            font-family: Inter, system-ui, sans-serif;
+        }
+
+        .outline {
+            display: inline-block;
+            color: transparent;
+
+            font-family: inherit;
+            font-weight: inherit;
+            letter-spacing: inherit;
+
+            -webkit-text-stroke: 1px #66716b;
+            paint-order: stroke fill;
+        }
+
+        .hero-copy {
+            max-width: 600px;
+
+            color: var(--muted);
+            font-size: 16px;
+
+            margin: 22px 0;
+        }
+
+        .hero-copy b {
+            color: #dce4df;
+        }
+
+
+        /* =========================================================
+           PROFILE IMAGE
+        ========================================================= */
+
+        .profile-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card {
+            width: 390px;
+
+            padding: 28px 28px 20px;
+
+            background: linear-gradient(
+                145deg,
+                #121815,
+                #0b0f0e
+            );
+
+            border: 1px solid #ffffff12;
+
+            border-radius: 24px;
+
+            box-shadow: 0 25px 65px #0008;
+        }
+
+        .profile-ring {
+            width: 330px;
+            height: 330px;
+
+            margin: 0 auto;
+
+            padding: 6px;
+
+            border-radius: 50%;
+
+            background: var(--lime);
+
+            box-shadow: 0 0 55px #c9ff4320;
+
+            overflow: hidden;
+        }
+
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            background: #171d1a;
+        }
+
+        .profile-placeholder a {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        .profile-placeholder img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center 20%;
+
+            border-radius: 50%;
+        }
+
+        .profile-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-top: 18px;
+            padding-top: 14px;
+
+            border-top: 1px solid #ffffff0c;
+
+            font: 9px monospace;
+
+            color: #68746d;
+        }
+
+        .profile-meta b {
+            color: var(--lime);
+
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about {
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 10px;
+        }
+
+        .panel {
+            background: linear-gradient(
+                145deg,
+                #111714,
+                #0c100f
+            );
+
+            border: 1px solid #ffffff0d;
+
+            border-radius: 16px;
+
+            padding: 21px;
+        }
+
+        .about-text {
+            font-size: 17px;
+
+            line-height: 1.5;
+
+            color: #bec8c2;
+        }
+
+        .edu {
+            border-left: 2px solid var(--lime);
+
+            padding-left: 15px;
+        }
+
+        .edu .year {
+            color: var(--lime);
+
+            font: 10px monospace;
+        }
+
+        .edu h3 {
+            font-size: 17px;
+
+            margin: 6px 0 2px;
+        }
+
+        .edu p {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .cgpa {
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding: 5px 8px;
+
+            border: 1px solid #ffffff12;
+
+            border-radius: 6px;
+
+            color: #cbd4cf;
+
+            font: 9px monospace;
+        }
+
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 9px;
+        }
+
+        .skill-card {
+            background: #0e1311;
+
+            border: 1px solid #ffffff0c;
+
+            border-radius: 14px;
+
+            padding: 18px;
+        }
+
+        .skill-card:hover {
+            border-color: #c9ff4333;
+        }
+
+        .skill-card h3 {
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+        }
+
+        .tag {
+            padding: 5px 8px;
+
+            border-radius: 999px;
+
+            background: #151b18;
+
+            border: 1px solid #ffffff09;
+
+            color: #aeb9b2;
+
+            font: 9px monospace;
+        }
+
+
+        /* =========================================================
+           PROJECTS
+        ========================================================= */
+
+        .projects {
+            display: grid;
+
+            gap: 10px;
+        }
+
+        .project {
+            display: grid;
+
+            grid-template-columns: 1fr 0.92fr;
+
+            min-height: 305px;
+
+            border: 1px solid #ffffff0d;
+
+            background: #0d1210;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+        }
+
+        .project-info {
+            padding: 24px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+        .project-num {
+            color: #637069;
+
+            font: 9px monospace;
+        }
+
+        .project h3 {
+            font-size: clamp(28px, 3.4vw, 46px);
+
+            line-height: 0.9;
+
+            letter-spacing: -0.06em;
+
+            margin: 11px 0;
+        }
+
+        .project p {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .project .tags {
+            margin: 12px 0;
+        }
+
+        .project-actions {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+
+        /* =========================================================
+           PROJECT IMAGE PLACEHOLDER
+        ========================================================= */
+
+        .project-visual {
+            padding: 16px;
+
+            background: #111713;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+
+            min-height: 270px;
+
+            border-radius: 13px;
+
+            border: 1px solid #ffffff0d;
+
+            background: #0a0f0d;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+
+            min-height: 270px;
+
+            border: 1px dashed #ffffff18;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: #68746d;
+
+            font: 10px monospace;
+
+            letter-spacing: 0.12em;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d1310,
+                    #0a0f0d
+                );
+        }
+
+        .image-placeholder span {
+            margin-top: 8px;
+
+            color: #49554e;
+
+            font-size: 8px;
+        }
+
+        .project-img-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 270px;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            min-height: 270px;
+
+            object-fit: contain;
+            object-position: center;
+
+            display: block;
+
+            border-radius: 13px;
+
+            background: #0a0f0d;
+
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .project-img-link:hover .project-img {
+            transform: scale(1.02);
+            filter: brightness(1.08);
+        }
+
+
+        /* =========================================================
+           CERTIFICATIONS
+        ========================================================= */
+
+        .certs {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 9px;
+        }
+
+        .cert {
+            padding: 18px;
+
+            background: #0e1311;
+
+            border: 1px solid #ffffff0c;
+
+            border-radius: 13px;
+        }
+
+        .cert small {
+            font: 9px monospace;
+
+            color: var(--lime);
+        }
+
+        .cert h3 {
+            font-size: 14px;
+
+            line-height: 1.3;
+
+            margin-top: 8px;
+        }
+
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        .contact {
+            background: #d4f965;
+            color: #0a0e08;
+
+            border-radius: 20px;
+
+            padding: 34px 38px;
+
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        .contact .kicker {
+            color: #4b641b;
+        }
+
+        .contact p {
+            max-width: 540px;
+
+            color: #40511d;
+
+            font-size: 13px;
+
+            margin-top: 9px;
+        }
+
+        .contact .btn {
+            background: #0a0e08;
+
+            border-color: #0a0e08;
+
+            color: #fff;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 25px 0 32px;
+
+            border-top: 1px solid #ffffff0a;
+
+            margin-top: 38px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #69756e;
+
+            font: 10px monospace;
+        }
+
+        .footer-links {
+            display: flex;
+
+            gap: 15px;
+        }
+
+
+        /* =========================================================
+           CASE STUDY MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 50;
+
+            display: none;
+
+            padding: 18px;
+
+            background: #050706dd;
+
+            backdrop-filter: blur(10px);
+
+            overflow: auto;
+        }
+
+        .modal.open {
+            display: block;
+        }
+
+        .modal-card {
+            max-width: 850px;
+
+            margin: 4vh auto;
+
+            background: #0c110f;
+
+            border: 1px solid #ffffff14;
+
+            border-radius: 18px;
+
+            padding: 27px;
+
+            box-shadow: 0 25px 80px #000;
+        }
+
+        .close {
+            float: right;
+
+            background: #ffffff08;
+
+            border: 1px solid #ffffff12;
+
+            color: #fff;
+
+            border-radius: 7px;
+
+            padding: 6px 9px;
+
+            cursor: pointer;
+        }
+
+        .modal h2 {
+            margin: 15px 0 8px;
+        }
+
+        .case-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 8px;
+
+            margin-top: 19px;
+        }
+
+        .case {
+            padding: 15px;
+
+            background: #121815;
+
+            border: 1px solid #ffffff08;
+
+            border-radius: 10px;
+        }
+
+        .case h4 {
+            font: 9px monospace;
+
+            color: var(--lime);
+
+            text-transform: uppercase;
+
+            margin-bottom: 6px;
+        }
+
+        .case p {
+            font-size: 12px;
+
+            color: #aeb8b2;
+        }
+
+
+        /* =========================================================
+           TABLET
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .links {
+                display: none;
+
+                position: absolute;
+                top: 58px;
+                left: 0;
+                right: 0;
+
+                padding: 8px;
+
+                background: #0c110ff5;
+                border: 1px solid #ffffff12;
+                border-radius: 12px;
+
+                flex-direction: column;
+                align-items: stretch;
+                gap: 2px;
+            }
+
+            .links.mobile {
+                display: flex;
+            }
+
+            .links a {
+                width: 100%;
+                text-align: left;
+                padding: 11px 12px;
+            }
+
+            .links .resume {
+                margin-left: 0;
+                margin-top: 3px;
+                justify-content: flex-start;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding-top: 95px;
+            }
+
+            .hero-copy {
+                max-width: 680px;
+            }
+
+            .profile-wrap {
+                width: 100%;
+            }
+
+            .profile-card {
+                width: min(390px, 100%);
+            }
+
+            .about,
+            .project {
+                grid-template-columns: 1fr;
+            }
+
+            .project-visual {
+                min-height: 0;
+                order: -1; /* image goes ABOVE the text */
+            }
+
+            .project-image {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+            }
+
+            .project-img-link {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+            }
+
+            .project-img {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .skills,
+            .certs {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .contact {
+                display: block;
+            }
+
+            .contact .actions {
+                margin-top: 17px;
+            }
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 560px) {
+
+            .wrap {
+                width: calc(100% - 24px);
+            }
+
+            nav {
+                width: calc(100% - 18px);
+                top: 7px;
+                height: 52px;
+                padding-left: 13px;
+            }
+
+            .logo {
+                width: 32px;
+                height: 32px;
+            }
+
+            .hero {
+                padding-top: 83px;
+                gap: 27px;
+            }
+
+            .eyebrow {
+                margin-bottom: 17px;
+                font-size: 9px;
+                letter-spacing: 0.13em;
+            }
+
+            h1 {
+                font-size: clamp(52px, 16vw, 72px);
+                line-height: 0.87;
+                letter-spacing: -0.055em;
+            }
+
+            /* Make outline text solid on mobile for better appearance */
+            .outline {
+                color: var(--text);
+                -webkit-text-stroke: 0;
+                paint-order: normal;
+            }
+
+            .hero-copy {
+                font-size: 14px;
+                line-height: 1.58;
+                margin: 18px 0;
+            }
+
+            .actions {
+                gap: 8px;
+            }
+
+            .actions .btn,
+            .actions .resume {
+                min-height: 42px;
+                padding: 10px 13px;
+            }
+
+            .profile-card {
+                width: min(350px, 100%);
+                padding: 17px 13px 15px;
+            }
+
+            .profile-ring {
+                width: min(270px, 100%);
+                height: auto;
+                aspect-ratio: 1 / 1;
+                padding: 5px;
+            }
+
+            .profile-meta {
+                margin-top: 15px;
+                padding-top: 12px;
+                font-size: 8px;
+            }
+
+            section {
+                padding: 48px 0;
+            }
+
+            .section-head {
+                display: block;
+                margin-bottom: 22px;
+            }
+
+            .section-head p {
+                margin-top: 11px;
+            }
+
+            h2 {
+                font-size: clamp(34px, 11vw, 48px);
+            }
+
+            .about,
+            .skills,
+            .certs,
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills,
+            .certs {
+                gap: 12px;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            .project {
+                min-height: 0;
+            }
+
+            .projects {
+                gap: 18px;
+            }
+
+            .project-info {
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .project h3 {
+                font-size: clamp(28px, 9vw, 40px);
+                margin: 13px 0;
+            }
+
+            .project p {
+                font-size: 13px;
+                line-height: 1.55;
+            }
+
+            .project .tags {
+                margin: 14px 0;
+            }
+
+            .project-visual {
+                width: 100%;
+                min-height: 0;
+                padding: 0;
+                order: -1; /* keep image above the text on mobile */
+            }
+
+            .project-image {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                border-radius: 0;
+            }
+
+            .project-img-link {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+            }
+
+            .project-img {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                aspect-ratio: auto;
+                object-fit: contain;
+                object-position: center;
+                border-radius: 0;
+            }
+
+            .project-actions {
+                width: 100%;
+                gap: 8px;
+                margin-top: 2px;
+            }
+
+            .project-actions .btn {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .contact {
+                padding: 26px 20px;
+            }
+
+            .contact .actions .btn {
+                width: 100%;
+            }
+
+            footer {
+                display: block;
+                line-height: 2.2;
+            }
+
+            .footer-links {
+                margin-top: 6px;
+            }
+
+            .modal {
+                padding: 10px;
+            }
+
+            .modal-card {
+                padding: 20px;
+                margin: 2vh auto;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
+
+    <nav>
+
+        <a class="logo" href="#home" aria-label="Srujal Parmar — Home">
+            <img
+                src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/exploratory-analysis.png?raw=true"
+                alt="Srujal Parmar"
+            >
+        </a>
+
+        <div class="links">
+
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+        <button
+            class="menu"
+            type="button"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+    </nav>
+
+
+    <main>
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section
+            class="hero wrap"
+            id="home"
+        >
+
+            <div class="reveal">
+
+                <div class="eyebrow">
+
+                    <i class="dot"></i>
+
+                    Data Analyst · Computer Science
+
+                </div>
+
+
+                <h1>
+                    SRUJAL<br>
+                    <span class="outline">PARMAR</span>
+                </h1>
+
+
+                <p class="hero-copy">
+
+                    Computer Science graduate turning raw data into
+                    useful insights through
+                    <b>SQL, Python, Excel and Power BI</b>
+                    — from cleaning and exploration to KPI analysis
+                    and business reporting.
+
+                </p>
+
+
+                <div class="actions">
+
+                    <a
+                        class="btn primary"
+                        href="#projects"
+                    >
+                        View My Work ↗
+                    </a>
+
+                    <a
+                        class="btn"
+                        href="https://github.com/srujal4518"
+                        target="_blank"
+                    >
+                        GitHub ↗
+                    </a>
+
+                    <a
+                        class="btn"
+                        href="https://www.linkedin.com/in/srujal-parmar-45548b280"
+                        target="_blank"
+                    >
+                        LinkedIn ↗
+                    </a>
+
+                    <a
+                        class="resume"
+                        href="https://drive.google.com/file/d/17OZOQakuR9-cghj0FI0OiehP2GzfJBgS/view?usp=drive_link"
+                        target="_blank"
+                    >
+                        Resume
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div class="profile-wrap reveal">
+
+                <div class="profile-card">
+
+                    <div class="profile-ring">
+<div class="profile-placeholder">
+    <a
+        href="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/photo-rezised.jpeg?raw=true"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Srujal Parmar profile image"
+    >
+        <img
+            src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/photo-rezised.jpeg?raw=true"
+            alt="Srujal Parmar"
+        >
+    </a>
+</div>
+
+                    <div class="profile-meta">
+
+                        <span>
+                            SRUJAL PARMAR
+                        </span>
+
+                        <b>
+                            DATA ANALYST
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ABOUT
+        ===================================================== -->
+
+        <section id="about">
+
+            <div class="wrap">
+
+                <div class="section-head reveal">
+
+                    <div>
+
+                        <div class="kicker">
+                            01 / About
+                        </div>
+
+                        <h2>
+                            Driven by<br>
+                            data.
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+                        A Computer Science graduate with hands-on
+                        project experience across data analysis,
+                        SQL, Excel, Python and Power BI.
+                    </p>
+
+                </div>
+
+
+                <div class="about">
+
+                    <div class="panel reveal">
+
+                        <p class="about-text">
+
+                            I work across the full analysis flow:
+                            preparing raw data, exploring patterns,
+                            querying with SQL, building dashboards
+                            and communicating insights clearly for
+                            business decisions.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="panel reveal">
+
+                        <div class="kicker">
+                            Education
+                        </div>
+
+
+                        <div class="edu">
+
+                            <span class="year">
+                                2022 — 2026
+                            </span>
+
+                            <h3>
+                                Bachelor of Engineering —
+                                Computer Science
+                            </h3>
+
+                            <p>
+                                LDRP Institute of Technology and Research
+                            </p>
+
+                            <span class="cgpa">
+                                CGPA 7.54 / 10 · Sem 5–8: 8.03 ·
+                                First Class with Distinction
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SKILLS
+        ===================================================== -->
+
+        <section id="skills">
+
+            <div class="wrap">
+
+                <div class="section-head reveal">
+
+                    <div>
+
+                        <div class="kicker">
+                            02 / Skills
+                        </div>
+
+                        <h2>
+                            Tools I use<br>
+                            to Analyse.
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skills">
+
+                    <!-- PROGRAMMING -->
+
+                    <div class="skill-card reveal">
+
+                        <h3>
+                            Programming & Data Analysis
+                        </h3>
+
+                        <div class="tags">
+
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">NumPy</span>
+                            <span class="tag">Data Cleaning</span>
+                            <span class="tag">Data Preparation</span>
+                            <span class="tag">EDA</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SQL -->
+
+                    <div class="skill-card reveal">
+
+                        <h3>
+                            SQL & Databases
+                        </h3>
+
+                        <div class="tags">
+
+                            <span class="tag">MySQL</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">Joins</span>
+                            <span class="tag">CTEs</span>
+                            <span class="tag">Window Functions</span>
+                            <span class="tag">CASE WHEN</span>
+                            <span class="tag">Aggregations</span>
+                            <span class="tag">Analytical Querying</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BI -->
+
+                    <div class="skill-card reveal">
+
+                        <h3>
+                            BI, Reporting & Visualization
+                        </h3>
+
+                        <div class="tags">
+
+                            <span class="tag">Power BI</span>
+                            <span class="tag">Excel</span>
+                            <span class="tag">Dashboard Development</span>
+                            <span class="tag">KPI Analysis</span>
+                            <span class="tag">KPI Reporting</span>
+                            <span class="tag">Data Visualization</span>
+                            <span class="tag">Business Reporting</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PROJECTS
+        ===================================================== -->
+
+        <section id="projects">
+
+            <div class="wrap">
+
+
+                <div class="section-head reveal">
+
+                    <div>
+
+                        <div class="kicker">
+                            03 / Selected Work
+                        </div>
+
+                        <h2>
+                            Projects built<br>
+                            around data.
+                        </h2>
+
+                    </div>
+
+
+                    <p>
+                        Four analytical projects spanning retail,
+                        sports, quick-commerce operations and public safety.
+                    </p>
+
+                </div>
+
+
+
+                <div class="projects">
+
+
+                    <!-- =================================================
+                         PROJECT 01 — ADIDAS
+                    ================================================= -->
+
+                    <article class="project reveal">
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-num">
+                                    01 — RETAIL ANALYTICS
+                                </span>
+
+
+                                <h3>
+                                    Adidas<br>
+                                    Sales Analytics
+                                </h3>
+
+
+                                <p>
+                                    Multi-dimensional retail analysis
+                                    across products, retailers, sales
+                                    channels and regions, using SQL
+                                    and an interactive Power BI
+                                    dashboard.
+                                </p>
+
+
+                                <div class="tags">
+
+                                    <span class="tag">
+                                        SQL
+                                    </span>
+
+                                    <span class="tag">
+                                        Power BI
+                                    </span>
+
+                                    <span class="tag">
+                                        Retail
+                                    </span>
+
+                                    <span class="tag">
+                                        KPI Analysis
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="project-actions">
+
+                                <button
+                                    class="btn primary"
+                                    onclick="openCase('adidas')"
+                                >
+                                    View Case Study
+                                </button>
+
+
+                                <a
+                                    class="btn"
+                                    href="https://github.com/srujal4518/Adidas_Sales_Analysis"
+                                    target="_blank"
+                                >
+                                    View on GitHub ↗
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="project-visual">
+
+                            <div class="project-image">
+
+                                <a
+                                    class="project-img-link"
+                                    href="https://github.com/srujal4518/Adidas_Sales_Analysis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Adidas Sales Analytics dashboard image"
+                                >
+                                    <img
+                                        class="project-img"
+                                        src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/adidas.png?raw=true"
+                                        alt="Adidas Sales Analytics Dashboard"
+                                    >
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         PROJECT 02 — IPL
+                    ================================================= -->
+
+                    <article class="project reveal">
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-num">
+                                    02 — SPORTS ANALYTICS
+                                </span>
+
+
+                                <h3>
+                                    IPL Team<br>
+                                    Performance
+                                </h3>
+
+
+                                <p>
+                                    Match-level and ball-by-ball
+                                    analysis covering team performance,
+                                    player statistics, outcomes,
+                                    venue trends and batting-bowling
+                                    metrics.
+                                </p>
+
+
+                                <div class="tags">
+
+                                    <span class="tag">
+                                        Pandas
+                                    </span>
+
+                                    <span class="tag">
+                                        SQL
+                                    </span>
+
+                                    <span class="tag">
+                                        Power BI
+                                    </span>
+
+                                    <span class="tag">
+                                        Sports Analytics
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="project-actions">
+
+                                <button
+                                    class="btn primary"
+                                    onclick="openCase('ipl')"
+                                >
+                                    View Case Study
+                                </button>
+
+
+                                <a
+                                    class="btn"
+                                    href="https://github.com/srujal4518/IPL-Analysis"
+                                    target="_blank"
+                                >
+                                    View on GitHub ↗
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="project-visual">
+
+                            <div class="project-image">
+
+                                <a
+                                    class="project-img-link"
+                                    href="https://github.com/srujal4518/IPL-Analysis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open IPL Team Performance dashboard image"
+                                >
+                                    <img
+                                        class="project-img"
+                                        src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/ipl.jpg?raw=true"
+                                        alt="IPL Team Performance Dashboard"
+                                    >
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         PROJECT 03 — QUICK COMMERCE
+                    ================================================= -->
+
+                    <article class="project reveal">
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-num">
+                                    03 — OPERATIONS ANALYTICS
+                                </span>
+
+
+                                <h3>
+                                    Quick Commerce<br>
+                                    Analytics
+                                </h3>
+
+
+                                <p>
+                                    Order-data analysis across companies,
+                                    cities, categories and customers,
+                                    with a two-page Power BI dashboard
+                                    for revenue and delivery performance.
+                                </p>
+
+
+                                <div class="tags">
+
+                                    <span class="tag">
+                                        SQL
+                                    </span>
+
+                                    <span class="tag">
+                                        Power BI
+                                    </span>
+
+                                    <span class="tag">
+                                        Operations
+                                    </span>
+
+                                    <span class="tag">
+                                        Customer Analysis
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="project-actions">
+
+                                <button
+                                    class="btn primary"
+                                    onclick="openCase('quick')"
+                                >
+                                    View Case Study
+                                </button>
+
+
+                                <a
+                                    class="btn"
+                                    href="https://github.com/srujal4518/Quick_Commerce_Analysis"
+                                    target="_blank"
+                                >
+                                    View on GitHub ↗
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="project-visual">
+
+                            <div class="project-image">
+
+                                <a
+                                    class="project-img-link"
+                                    href="https://github.com/srujal4518/Quick_Commerce_Analysis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Quick Commerce Analytics dashboard image"
+                                >
+                                    <img
+                                        class="project-img"
+                                        src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/quick.jpeg?raw=true"
+                                        alt="Quick Commerce Analytics Dashboard"
+                                    >
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         PROJECT 04 — CHICAGO CRIME
+                    ================================================= -->
+
+                    <article class="project reveal">
+
+                        <div class="project-info">
+
+                            <div>
+
+                                <span class="project-num">
+                                    04 — PUBLIC SAFETY ANALYTICS
+                                </span>
+
+                                <h3>
+                                    Chicago Crime<br>
+                                    Analytics
+                                </h3>
+
+                                <p>
+                                    Analysis of 2.7 million reported crime
+                                    incidents from 2016 to 2026, covering
+                                    trends, arrest rates, timing, locations
+                                    and COVID-era changes, using SQL and a
+                                    two-page Power BI dashboard.
+                                </p>
+
+                                <div class="tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">SQL</span>
+                                    <span class="tag">Power BI</span>
+                                    <span class="tag">Public Safety</span>
+                                </div>
+
+                            </div>
+
+                            <div class="project-actions">
+
+                                <button
+                                    class="btn primary"
+                                    onclick="openCase('crime')"
+                                >
+                                    View Case Study
+                                </button>
+
+                                <a
+                                    class="btn"
+                                    href="https://github.com/srujal4518/Chicago-crime-analysis"
+                                    target="_blank"
+                                >
+                                    View on GitHub ↗
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="project-visual">
+
+                            <div class="project-image">
+
+                                <a
+                                    class="project-img-link"
+                                    href="https://github.com/srujal4518/Chicago-crime-analysis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Chicago Crime Analytics repository"
+                                >
+                                    <img
+                                        class="project-img"
+                                        src="https://github.com/srujal4518/images-threadsANDtrends/blob/main/images/Chicago%20Crime%20Analytics%20Dashboard.jpeg?raw=true"
+                                        alt="Chicago Crime Analytics Dashboard"
+                                    >
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CERTIFICATIONS
+        ===================================================== -->
+
+        <section id="certifications">
+
+            <div class="wrap">
+
+                <div class="section-head reveal">
+
+                    <div>
+
+                        <div class="kicker">
+                            04 / Certifications
+                        </div>
+
+                        <h2>
+                            Credentials.
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="certs">
+
+
+                    <div class="cert reveal">
+
+                        <small>
+                            NPTEL
+                        </small>
+
+                        <h3>
+                            Python for Data Science (Elite)
+                        </h3>
+
+                    </div>
+
+
+                    <div class="cert reveal">
+
+                        <small>
+                            NPTEL
+                        </small>
+
+                        <h3>
+                            Enhancing Soft Skills and Personality
+                            (Elite)
+                        </h3>
+
+                    </div>
+
+
+                    <div class="cert reveal">
+
+                        <small>
+                            AICTE–EDUNET FOUNDATION
+                        </small>
+
+                        <h3>
+                            Virtual Internship — Artificial
+                            Intelligence & Machine Learning
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CONTACT
+        ===================================================== -->
+
+        <section id="contact">
+
+            <div class="wrap">
+
+                <div class="contact reveal">
+
+                    <div>
+
+                        <div class="kicker">
+                            05 / Contact
+                        </div>
+
+                        <h2>
+                            Let's talk<br>
+                            data.
+                        </h2>
+
+                        <p>
+                            I'm open to opportunities where I can use
+                            data to solve practical business problems
+                            and create meaningful insights.
+                        </p>
+
+                    </div>
+
+
+                    <div class="actions">
+
+                        <a
+                            class="btn"
+                            href="mailto:srujalparmar0305@gmail.com"
+                        >
+                            Email ↗
+                        </a>
+
+
+                        <a
+                            class="btn"
+                            href="tel:+919016000361"
+                        >
+                            Call ↗
+                        </a>
+
+
+                        <a
+                            class="btn"
+                            href="https://www.linkedin.com/in/srujal-parmar-45548b280"
+                            target="_blank"
+                        >
+                            LinkedIn ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer class="wrap">
+
+        <span>
+            Srujal Parmar — Data Analyst
+        </span>
+
+
+        <div class="footer-links">
+
+            <a
+                href="https://github.com/srujal4518"
+                target="_blank"
+            >
+                GitHub
+            </a>
+
+            <a
+                href="https://www.linkedin.com/in/srujal-parmar-45548b280"
+                target="_blank"
+            >
+                LinkedIn
+            </a>
+
+            <a
+                href="mailto:srujalparmar0305@gmail.com"
+            >
+                Email
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         CASE STUDY MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="modal"
+        onclick="if(event.target === this) closeCase()"
+    >
+
+        <div class="modal-card">
+
+            <button
+                class="close"
+                type="button"
+                onclick="closeCase()"
+            >
+                ✕
+            </button>
+
+
+            <div
+                class="kicker"
+                id="mKicker"
+            ></div>
+
+
+            <h2 id="mTitle"></h2>
+
+
+            <p
+                id="mIntro"
+                style="color:#aeb8b3;max-width:700px"
+            ></p>
+
+
+            <div
+                class="case-grid"
+                id="mGrid"
+            ></div>
+
+
+            <div style="margin-top:25px">
+
+                <a
+                    class="btn primary"
+                    id="mGithub"
+                    target="_blank"
+                >
+                    View on GitHub ↗
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+
+        /* =========================================================
+           CASE STUDY DATA
+        ========================================================= */
+
+        const cases = {
+
+            adidas: {
+
+                k: "01 / RETAIL ANALYTICS",
+
+                t: "Adidas Sales Analytics",
+
+                i:
+                    "A multi-dimensional retail sales analysis designed " +
+                    "to identify performance and profitability drivers " +
+                    "across the dataset.",
+
+                g:
+                    "https://github.com/srujal4518/Adidas_Sales_Analysis",
+
+                items: [
+
+                    [
+                        "Problem",
+                        "Understand sales and profitability across products, " +
+                        "retailers, regions, sales methods and time periods."
+                    ],
+
+                    [
+                        "Data",
+                        "Retail sales data spanning products, retailers, " +
+                        "sales channels and regions."
+                    ],
+
+                    [
+                        "Process",
+                        "SQL analysis followed by an interactive Power BI " +
+                        "dashboard covering sales, units sold and profitability."
+                    ],
+
+                    [
+                        "Analysis",
+                        "Retailer performance, regional performance, sales " +
+                        "channels, products and profitability drivers."
+                    ],
+
+                    [
+                        "Insights",
+                        "Top and underperforming retailers and channels " +
+                        "were identified and translated into actionable " +
+                        "business recommendations."
+                    ],
+
+                    [
+                        "Business Impact",
+                        "Provides a structured basis for retailer and " +
+                        "regional performance reviews and data-driven recommendations."
+                    ]
+
+                ]
+
+            },
+
+
+            ipl: {
+
+                k: "02 / SPORTS ANALYTICS",
+
+                t: "IPL Team Performance Analytics",
+
+                i:
+                    "Match-level and ball-by-ball IPL data transformed " +
+                    "into structured team and player performance analysis.",
+
+                g:
+                    "https://github.com/srujal4518/IPL-Analysis",
+
+                items: [
+
+                    [
+                        "Problem",
+                        "Analyze team and player performance while " +
+                        "understanding match outcomes and recurring patterns."
+                    ],
+
+                    [
+                        "Data",
+                        "Match-level and ball-by-ball data covering scoring, " +
+                        "outcomes, players, venues and batting-bowling statistics."
+                    ],
+
+                    [
+                        "Process",
+                        "Pandas was used to structure raw data, followed by " +
+                        "analytical SQL queries and a Power BI dashboard."
+                    ],
+
+                    [
+                        "Analysis",
+                        "Team performance, player performance, venue trends, " +
+                        "batting-bowling statistics and match-by-match comparisons."
+                    ],
+
+                    [
+                        "Insights",
+                        "Top-performing players and winning patterns were " +
+                        "surfaced, highlighting consistent trends across seasons and venues."
+                    ],
+
+                    [
+                        "Business Impact",
+                        "Creates a clear analytical view for comparing teams, " +
+                        "players and performance patterns across IPL data."
+                    ]
+
+                ]
+
+            },
+
+
+            quick: {
+
+                k: "03 / OPERATIONS ANALYTICS",
+
+                t: "Quick Commerce Analytics",
+
+                i:
+                    "An operations-focused analysis of quick-commerce order " +
+                    "data across companies, cities, categories and customers.",
+
+                g:
+                    "https://github.com/srujal4518/Quick_Commerce_Analysis",
+
+                items: [
+
+                    [
+                        "Problem",
+                        "Evaluate revenue, delivery performance and customer " +
+                        "behavior across a quick-commerce dataset."
+                    ],
+
+                    [
+                        "Data",
+                        "Orders across companies, cities, categories and " +
+                        "customers, including ratings, discounts, age groups " +
+                        "and payment preferences."
+                    ],
+
+                    [
+                        "Process",
+                        "SQL analysis of revenue, order value, company performance, " +
+                        "delivery efficiency and customer behavior, presented " +
+                        "through a two-page Power BI dashboard."
+                    ],
+
+                    [
+                        "Analysis",
+                        "Revenue, order volume, delivery performance, ratings, " +
+                        "discounts, customer age groups and payment preferences."
+                    ],
+
+                    [
+                        "Insights",
+                        "Delivery-time bottlenecks and discount-sensitive " +
+                        "customer segments were identified."
+                    ],
+
+                    [
+                        "Business Impact",
+                        "Supports data-driven operational decisions around " +
+                        "delivery performance and customer behavior."
+                    ]
+
+                ]
+
+            },
+
+
+            crime: {
+
+                k: "04 / PUBLIC SAFETY ANALYTICS",
+
+                t: "Chicago Crime Analytics",
+
+                i:
+                    "Analysis of reported crime incidents in Chicago " +
+                    "from 2016 to 2026, covering trends, arrests, timing " +
+                    "and locations.",
+
+                g:
+                    "https://github.com/srujal4518/Chicago-crime-analysis",
+
+                items: [
+
+                    [
+                        "Problem",
+                        "Understand how reported crime in Chicago changed " +
+                        "over time, and how it varies by crime type, hour, " +
+                        "month, district and location."
+                    ],
+
+                    [
+                        "Data",
+                        "2,695,865 reported incidents from January 2016 to " +
+                        "November 2026 across 33 primary crime types, with " +
+                        "arrest and domestic flags, district and location."
+                    ],
+
+                    [
+                        "Process",
+                        "Cleaned the raw data in a Python notebook, answered " +
+                        "nine questions with SQL in MySQL, and built a " +
+                        "two-page Power BI dashboard."
+                    ],
+
+                    [
+                        "Analysis",
+                        "Yearly trends, top crime types, arrest rates, peak " +
+                        "hours, monthly seasonality, domestic share by " +
+                        "district, theft locations and COVID-period " +
+                        "comparisons, using CTEs and window functions."
+                    ],
+
+                    [
+                        "Insights",
+                        "Reported incidents fell 18.65% in 2020 and recovered " +
+                        "by 2023. Theft is the top category every year. " +
+                        "Arrest rates range from 98.94% for narcotics to " +
+                        "3.33% for deceptive practice, and motor vehicle " +
+                        "theft is about 115% higher after COVID."
+                    ],
+
+                    [
+                        "Business Impact",
+                        "Gives a category-level view of when and where " +
+                        "reported crime clusters, to help plan resources " +
+                        "and prevention. The findings are descriptive and " +
+                        "do not show causes."
+                    ]
+
+                ]
+
+            }
+
+        };
+
+
+
+        /* =========================================================
+           OPEN CASE STUDY
+        ========================================================= */
+
+        function openCase(key) {
+
+            const project = cases[key];
+
+            document.getElementById("mKicker").textContent =
+                project.k;
+
+            document.getElementById("mTitle").textContent =
+                project.t;
+
+            document.getElementById("mIntro").textContent =
+                project.i;
+
+            document.getElementById("mGithub").href =
+                project.g;
+
+
+            document.getElementById("mGrid").innerHTML =
+                project.items
+                    .map(item => `
+                        <div class="case">
+
+                            <h4>
+                                ${item[0]}
+                            </h4>
+
+                            <p>
+                                ${item[1]}
+                            </p>
+
+                        </div>
+                    `)
+                    .join("");
+
+
+            document
+                .getElementById("modal")
+                .classList.add("open");
+
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+
+        /* =========================================================
+           CLOSE CASE STUDY
+        ========================================================= */
+
+        function closeCase() {
+
+            document
+                .getElementById("modal")
+                .classList.remove("open");
+
+            document.body.style.overflow = "";
+        }
+
+
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("show");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach(element => {
+
+                observer.observe(element);
+
+            });
+
+
+
+        /* =========================================================
+           MOBILE MENU
+        ========================================================= */
+
+        const menu =
+            document.querySelector(".menu");
+
+        const links =
+            document.querySelector(".links");
+
+
+        menu.addEventListener("click", () => {
+
+            links.classList.toggle("mobile");
+
+        });
+
+
+        /* Close mobile menu after clicking a link */
+
+        document
+            .querySelectorAll(".links a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    links.classList.remove("mobile");
+
+                });
+
+            });
+
+
+        /* =========================================================
+           ESCAPE KEY — CLOSE MODAL
+        ========================================================= */
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+
+                closeCase();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
